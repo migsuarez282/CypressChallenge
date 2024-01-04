@@ -1,0 +1,5 @@
+/node_modules
+/html-report
+/visual-screenshots
+/cypress/screenshots
+.DS_Store

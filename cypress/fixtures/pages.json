@@ -1,0 +1,18 @@
+[
+    {
+        "id": "products",
+        "url": "products"
+    },
+    {
+        "id": "cart",
+        "url": "view_cart"
+    },
+    {
+        "id": "testCases",
+        "url": "test_cases"
+    },
+    {
+        "id": "Contact",
+        "url": "contact_us"
+    }
+]

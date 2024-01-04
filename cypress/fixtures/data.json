@@ -1,0 +1,23 @@
+{
+    "name": "testuser",
+    "personalData": [
+        {
+            "password": "HugeTest",
+            "day": "11",
+            "month": "August",
+            "year": "1995",
+            "mobile": "3122456789"
+        }
+    ],
+    "shippingInformation": [
+        {
+            "name": "Jhon",
+            "lastName": "Due",
+            "address": "Calle 95 # 5-6",
+            "country": "United States",
+            "state": "California",
+            "city": "Los Angeles",
+            "zipCode": "11001"
+        }
+    ]
+}
