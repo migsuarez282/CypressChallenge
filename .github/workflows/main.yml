@@ -14,3 +14,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           spec: cypress/e2e/image-diff/visual-testing-cypress.cy.js
+      - name: Download reports
+        uses: actions/download-artifact@v4
+        with:
+          name: cypress-reports
+          run: ls -R
