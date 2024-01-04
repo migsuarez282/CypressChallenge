@@ -13,4 +13,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          spec: cypress/e2e/register.cy.js
+          spec: cypress/e2e/image-diff/visual-testing-cypress.cy.js
