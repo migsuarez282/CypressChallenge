@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: 'Running test on BrowserStack'
-        run:  browserstack-cypress run --sync
+        run:  BROWSERSTACK_LOCAL=true browserstack-cypress run --sync
       - name: Download visual screenshots
         uses: actions/upload-artifact@v3
         with:

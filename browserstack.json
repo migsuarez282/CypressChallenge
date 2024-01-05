@@ -32,7 +32,7 @@
         "headless": true
     },
     "connection_settings": {
-        "local": false,
+        "local": true,
         "local_identifier": null,
         "local_mode": null,
         "local_config_file": null
