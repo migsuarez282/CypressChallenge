@@ -14,8 +14,10 @@ jobs:
           build-name: 'Raptor_Git_Actions'
       - name: Checkout
         uses: actions/checkout@v4
+      - name: 'Installing browserstack-cypress-cli'
+        run: npm install -g browserstack-cypress-cli
       - name: 'Running test on BrowserStack'
-        run:  BROWSERSTACK_LOCAL=true browserstack-cypress run --sync
+        run:  browserstack-cypress run --sync
       - name: Download visual screenshots
         uses: actions/upload-artifact@v3
         with:
