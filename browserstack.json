@@ -10,6 +10,32 @@
             "versions": [
                 "latest"
             ]
+        },
+        {
+            "os": "Windows 10",
+            "browser": "edge",
+            "versions": [
+                "latest"]
+        },
+        {
+            "browser": "chrome",
+            "os": "OS X Ventura",
+            "versions": [
+                "latest"
+            ]
+        },
+        {
+            "browser": "firefox",
+            "os": "OS X Ventura",
+            "versions": [
+                "latest"
+            ]
+        },
+        {
+            "os": "Windows 11",
+            "browser": "firefox",
+            "versions": [
+                "latest"]
         }
     ],
     "run_settings": {
@@ -32,7 +58,7 @@
         "headless": true
     },
     "connection_settings": {
-        "local": true,
+        "local": false,
         "local_identifier": null,
         "local_mode": null,
         "local_config_file": null
