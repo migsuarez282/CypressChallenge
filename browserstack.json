@@ -1,0 +1,41 @@
+{
+    "auth": {
+        "username": "",
+        "access_key": ""
+    },
+    "browsers": [
+        {
+            "browser": "chrome",
+            "os": "Windows 10",
+            "versions": [
+                "latest"
+            ]
+        }
+    ],
+    "run_settings": {
+        "cypress_config_file": "./cypress.config.js",
+        "cypress_version": "13.latest",
+        "project_name": "Raptor-Git-Actions",
+        "build_name": "build-raptor",
+        "exclude": ["cypress/e2e/percy/visual-testing-percy.cy.js"],
+        "parallels": 10,
+        "downloads": ["./cypress-visual-screenshots", "./cypress-visual-html-report"],
+        "npm_dependencies": {
+            "@faker-js/faker": "^8.3.1",
+            "@percy/cypress": "^3.1.2",
+            "@shelex/cypress-allure-plugin": "^2.40.0",
+            "cypress-image-diff-html-report": "^2.0.2",
+            "cypress-image-diff-js": "^2.1.2",
+            "cypress": "^13.6.1"
+        },
+        "package_config_options": {},
+        "headless": true
+    },
+    "connection_settings": {
+        "local": false,
+        "local_identifier": null,
+        "local_mode": null,
+        "local_config_file": null
+    },
+    "disable_usage_reporting": false
+}

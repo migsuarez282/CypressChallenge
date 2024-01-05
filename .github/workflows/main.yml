@@ -6,16 +6,23 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
+      - name: 'BrowserStack Env Setup'
+        uses: 'browserstack/github-actions/setup-env@master'
+        with:
+          username:  ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          build-name: 'Raptor_Git_Actions'
       - name: Checkout
         uses: actions/checkout@v4
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - name: 'Running test on BrowserStack'
+        run: - run: browserstack-cypress run --sync
+      - name: Download visual screenshots
+        uses: actions/upload-artifact@v3
         with:
-          spec: cypress/e2e/image-diff/visual-testing-cypress.cy.js
-      - name: Download reports
-        uses: actions/download-artifact@v4
+          name: actions-visual-report
+          path: cypress-visual-screenshots
+      - name: Download visual report
+        uses: actions/upload-artifact@v3
         with:
-          name: cypress-reports
-          run: ls -R
+          name: actions-visual-report
+          path: cypress-visual-html-report

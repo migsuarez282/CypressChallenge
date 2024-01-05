@@ -3,3 +3,4 @@
 /visual-screenshots
 /cypress/screenshots
 .DS_Store
+npm_install_debug.log
