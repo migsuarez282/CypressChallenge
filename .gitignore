@@ -4,3 +4,7 @@
 /cypress/screenshots
 .DS_Store
 npm_install_debug.log
+/build_artifacts
+build_results.txt
+usage.log
+results/
