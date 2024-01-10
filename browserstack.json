@@ -54,8 +54,7 @@
             "cypress-image-diff-js": "^2.1.2",
             "cypress": "^13.6.1"
         },
-        "package_config_options": {},
-        "headless": true
+        "package_config_options": {}
     },
     "connection_settings": {
         "local": false,
