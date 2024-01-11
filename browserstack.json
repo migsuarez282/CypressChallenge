@@ -36,6 +36,12 @@
             "browser": "firefox",
             "versions": [
                 "latest"]
+        },
+        {
+            "os": "OS X Ventura",
+            "browser": "webkit",
+            "versions": [
+                "latest"]
         }
     ],
     "run_settings": {

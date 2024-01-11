@@ -10,4 +10,5 @@ module.exports = defineConfig({
       return getCompareSnapshotPlugin(on, config);
   }
   },
+  experimentalWebKitSupport: true
 });
