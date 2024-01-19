@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: actions-visual-report
-          path: build_artifacts
+          path: ./build_artifacts
       - name: Download visual report
         uses: actions/upload-artifact@v3
         with:
