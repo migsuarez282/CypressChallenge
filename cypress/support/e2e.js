@@ -1,3 +1,4 @@
+///<reference types="Cypress"/>
 import '../support/commands/login-commands';
 import '../support/commands/register-commands';
 import '@percy/cypress';
