@@ -2,7 +2,7 @@ import utils from '../utilities';
 import uiRegister from '../elements/register-elements';
 import uiHome from '../elements/home-elements';
 import { faker } from '@faker-js/faker';
-import '@hugetools/test-helper'
+
 
 
 Cypress.Commands.add('typeDataSingUp', (name) => {
