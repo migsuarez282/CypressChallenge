@@ -1,6 +1,6 @@
 class utilities {
     static getByCssSelector(selector, ...args) {
-        return cy.get(`[data-qa="${selector}"]`, ...args);
+        return cy.get(`[data-at="${selector}"]`, ...args);
     }
     static getById(selector, ...args) {
         return cy.get(`#${selector}`, ...args);

@@ -6,22 +6,32 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "percy:test": "npx percy exec -- cypress run --spec 'cypress/e2e/visual-testing.cy.js' ",
-    "as": "cypress-image-diff-html-report generate --rf html-report/cypress_visual_report.json"
+    "as": "cypress-image-diff-html-report generate --rf html-report/cypress_visual_report.json",
+    "test:api": "npx cypress run --spec 'cypress/e2e/api/*.cy.js'",
+    "test:auth": "npx cypress run --spec 'cypress/e2e/auth/*.cy.js'",
+    "test:cart": "npx cypress run --spec 'cypress/e2e/cart/*.cy.js'",
+    "test:checkout": "npx cypress run --spec 'cypress/e2e/checkout/*.cy.js'",
+    "test:favorites": "npx cypress run --spec 'cypress/e2e/favorites/*.cy.js'",
+    "test:all": "npx cypress run --spec 'cypress/e2e/api/*.cy.js','cypress/e2e/auth/*.cy.js','cypress/e2e/cart/*.cy.js','cypress/e2e/checkout/*.cy.js','cypress/e2e/favorites/*.cy.js','cypress/e2e/history/*.cy.js'"
   },
   "author": "Raptor Team",
   "license": "ISC",
   "devDependencies": {
-    "@faker-js/faker": "^8.3.1",
+    "@faker-js/faker": "^8.4.1",
     "@percy/cli": "^1.26.0",
     "@percy/cypress": "^3.1.2",
     "@shelex/cypress-allure-plugin": "^2.40.0",
     "@types/cypress": "^1.1.3",
     "cypress": "^13.6.1",
     "cypress-image-diff-html-report": "^2.0.2",
+    "cypress-xpath": "^2.0.1",
+    "mocha": "^11.7.1",
+    "mocha-simple-html-reporter": "^2.0.0",
+    "mochawesome": "^7.1.3",
     "playwright-webkit": "1.34"
   },
   "dependencies": {
-    "@hugetools/test-helper": "^1.0.5",
+    "@hugetools/test-helper": "^1.0.7",
     "cypress-image-diff-js": "^2.1.2",
     "scroll-to-bottomjs": "^1.1.0"
   }

@@ -1,0 +1,128 @@
+{
+  "multipleProductsForCheckout": [
+    {
+    "name": "Balón de Fútbol Profesional",
+    "slug": "balon-de-futbol-profesional",
+    "price": 1200.00
+  },
+    {
+    "name": "Press de Banca Plegable",
+    "slug": "press-de-banca-plegable",
+    "price": 6500.00
+  },
+  {
+    "name": "Raquetas de Pádel con Mango Suave",
+    "slug": "raquetas-de-padel-con-mango-suave",
+    "price": 3500.00
+  },
+  {
+    "name": "Rodilleras Deportivas",
+    "slug": "rodilleras-deportivas",
+    "price": 350.00
+  },
+   {
+    "name": "Gafas de Natación recubiertas",
+    "slug": "gafas-de-natacion-recubiertas",
+    "price": 700.00
+  }
+  ],
+  
+  
+    "allProductsForCheckout": 
+    
+    [
+  {
+    "name": "Balón de Fútbol Profesional",
+    "slug": "balon-de-futbol-profesional",
+    "price": 1200.00,
+    "_comment": "banda-elastica-de-resistencia, this product isn't in the list, this is required for the Favorites test case"
+  },
+  {
+    "name": "Rodilleras Deportivas",
+    "slug": "rodilleras-deportivas",
+    "price": 350.00
+  },
+  {
+    "name": "Guantes para Levantamiento de Pesas",
+    "slug": "guantes-para-levantamiento-de-pesas",
+    "price": 400.00
+  },
+  {
+    "name": "Reloj Deportivo GPS",
+    "slug": "reloj-deportivo-gps",
+    "price": 7000.00
+  },
+  {
+    "name": "Tapete de Yoga Antideslizante",
+    "slug": "tapete-de-yoga-antideslizante",
+    "price": 500.00
+  },
+  {
+    "name": "Pesas de Alto Rendimiento",
+    "slug": "pesas-de-alto-rendimiento",
+    "price": 3000.00
+  },
+  {
+    "name": "Raquetas de Pádel con Mango Suave",
+    "slug": "raquetas-de-padel-con-mango-suave",
+    "price": 3500.00
+  },
+  {
+    "name": "Gafas de Natación recubiertas",
+    "slug": "gafas-de-natacion-recubiertas",
+    "price": 700.00
+  },
+  {
+    "name": "Medias Tobilleras Fluorescentes",
+    "slug": "medias-tobilleras-fluorescentes",
+    "price": 250.00
+  },
+  {
+    "name": "Medias Tobilleras Oscuras",
+    "slug": "medias-tobilleras-oscuras",
+    "price": 200.00
+  },
+  {
+    "name": "Medias Ortopédicas de Compresión",
+    "slug": "medias-ortopedicas-de-compresion",
+    "price": 400.00
+  },
+  {
+    "name": "Camiseta Deportiva Gris para Hombre",
+    "slug": "camiseta-deportiva-gris-para-hombre",
+    "price": 700.00
+  },
+  {
+    "name": "Camiseta de Licra Deportiva para Hombre",
+    "slug": "camiseta-de-licra-deportiva-para-hombre",
+    "price": 650.00
+  },
+  {
+    "name": "Camiseta de Licra Deportiva para Dama",
+    "slug": "camiseta-de-licra-deportiva-para-dama",
+    "price": 600.00
+  },
+  {
+    "name": "Chaqueta Deportiva para Correr",
+    "slug": "chaqueta-deportiva-para-correr",
+    "price": 1500.00
+  },
+  {
+    "name": "Press de Banca Plegable",
+    "slug": "press-de-banca-plegable",
+    "price": 6500.00
+  },
+  {
+    "name": "Mancuernas Recubiertas de Neopreno",
+    "slug": "mancuernas-recubiertas-de-neopreno",
+    "price": 800.00
+  },
+  {
+    "name": "Set de Pesas Ajustables",
+    "slug": "set-de-pesas-ajustables",
+    "price": 2500.00
+  }
+  
+  
+]
+}
