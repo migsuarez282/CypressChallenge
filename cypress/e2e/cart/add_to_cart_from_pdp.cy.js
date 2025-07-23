@@ -1,4 +1,3 @@
-// Import Page Object Model (POM) classes for better test organization and reusability.
 import HomePage from '../../support/pages/HomeProductsPage';
 import ProductDetailPage from '../../support/pages/ProductDetailPage';
 import CartPage from '../../support/pages/CartPage';
