@@ -1,5 +1,12 @@
 {
     "email": "emaildummy@hugeqa.com",
-    "password": "qazwsxedc"
+    "password": "qazwsxedc",
+
+    "existingUser": {
+    "email": "usertotest4@gmail.com"
+  },
+  "loginUser": {
+    "email": "huge.test@gmail.com",
+    "password": "Huge2025."
   }
-  
+  }
