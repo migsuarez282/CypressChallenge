@@ -1,30 +1,38 @@
-name: Cypress Tests
+name: Cypress Tests on Electron
 
 on: push
 
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
+    
     steps:
-      - name: 'BrowserStack Env Setup'
-        uses: 'browserstack/github-actions/setup-env@master'
-        with:
-          username:  ${{ secrets.BROWSERSTACK_USERNAME }}
-          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: 'Raptor_Git_Actions'
       - name: Checkout
         uses: actions/checkout@v4
-      - name: 'Installing browserstack-cypress-cli'
-        run: npm install -g browserstack-cypress-cli
-      - name: 'Running test on BrowserStack'
-        run:  browserstack-cypress run --sync
-      - name: Download visual screenshots
+
+      # 1. Install Node.js and your project dependencies (including Cypress)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Use your project's node version
+      - name: Install Dependencies
+        run: npm ci
+
+      # 2. Run the Cypress tests, specifying only the electron browser
+      - name: Run Cypress Tests on Electron
+        run: npx cypress run --browser electron
+
+      # 3. Upload the reports from the correct paths
+      - name: Upload Visual Report
         uses: actions/upload-artifact@v4
         with:
-          name: actions-visual-report
-          path: ./build_artifacts
-      - name: Download visual report
+          name: visual-report-electron
+          path: cypress-visual-report/
+
+      - name: Upload Visual Diffs (on failure)
+        # This step only runs if the previous test step failed
+        if: failure() 
         uses: actions/upload-artifact@v4
         with:
-          name: actions-visual-report
-          path: cypress-visual-html-report
+          name: visual-diffs-electron
+          path: cypress-visual-screenshots/diff/
