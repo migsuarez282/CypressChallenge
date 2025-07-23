@@ -1,0 +1,35 @@
+
+{
+    "validUser1": {
+        "email": "emaildummy@hugeqa.com",
+        "password": "qazwsxedc"
+    },
+    "validUser2": {
+        "email": "huge2.test@gmail.com",
+        "password": "Monday12."
+    },
+    "invalidUser": {
+        "email": "wrong@example.com",
+        "password": "wrongpassword"
+    },
+    "newUser": {
+        "name": "Nuevo Usuario",
+        "email": "new.user@example.com",
+        "password": "NewUserPass123!",
+        "password_confirmation": "NewUserPass123!"
+    },
+    "userWithMismatchedPasswords": {
+        "name": "Pass Mismatch",
+        "email": "mismatch@example.com",
+        "password": "Password123!",
+        "password_confirmation": "PasswordIncorrect!"
+    },
+    "userWithExistingEmail": {
+        "name": "Existing Email",
+        "email": "testuser@example.com", 
+        "password": "Password123!",
+        "password_confirmation": "Password123!"
+    }
+}
+
+

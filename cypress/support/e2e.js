@@ -1,5 +1,8 @@
 ///<reference types="Cypress"/>
+
 import '../support/commands/login-commands';
+import '../support/commands/main-navigation-commands';
+import '../support/commands/auth-actions';
 import '../support/commands/register-commands';
 import '@percy/cypress';
 import '@hugetools/test-helper'
