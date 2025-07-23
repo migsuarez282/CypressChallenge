@@ -19,12 +19,12 @@ jobs:
       - name: 'Running test on BrowserStack'
         run:  browserstack-cypress run --sync
       - name: Download visual screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: actions-visual-report
           path: ./build_artifacts
       - name: Download visual report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: actions-visual-report
           path: cypress-visual-html-report
