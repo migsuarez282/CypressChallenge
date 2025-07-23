@@ -5,11 +5,6 @@ import SignupPage from '../../support/pages/SignupPage'; // Reuse from previous 
 
 const { faker } = require('@faker-js/faker');
 
-// It's generally better to define test data within or near the tests that use it,
-// or in a fixtures file if it's static and shared across many tests.
-// For dynamic data like emails, generating it in the test is best.
-// const users = require('../../fixtures/challenge.json'); // Keep if you use it for other tests
-
 describe('User Login Process', () => {
 
     beforeEach(() => {
@@ -17,15 +12,16 @@ describe('User Login Process', () => {
     });
     
      // --- Test Case 1: Basic Login process --- ✅
-it.only('validate successful login', () => {
+it('validate successful login', () => {
     // Phase 1: Fill out the login form
     // Input a valid email and password into the respective fields.
     LoginPage.actions.fillLoginForm('huge.test@gmail.com', 'Huge2025.');
 
     // Phase 2: Submit the form
     // Click the login button to attempt authentication.
-    //LoginPage.actions.submitLoginForm();
+    LoginPage.actions.submitLoginForm();
     HomeProductsPage.actions.visitHomePage(); 
+    cy.wait(2000); // Wait for the home page to load after login
 
     // Phase 3: Validate successful login
     // Assert that the user is successfully logged in, typically by verifying the presence of a logout link or dashboard element.
@@ -104,7 +100,6 @@ it('validate the logout option', () => {
     // of the login link or a similar element indicating a non-authenticated state.
     LoginPage.actions.assertLoggedOut();
 });
-
 
 /*
     it('validate successful login', () => {
