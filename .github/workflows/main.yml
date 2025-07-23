@@ -4,20 +4,24 @@ on: push
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-22.04 # GitHub Actions runner OS
+
     steps:
       - name: 'BrowserStack Env Setup'
         uses: 'browserstack/github-actions/setup-env@master'
         with:
           username:  ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-          build-name: 'Raptor_Git_Actions'
+          build-name: 'Raptor_Git_Actions - Chrome on macOS Ventura' # A more descriptive build name
       - name: Checkout
         uses: actions/checkout@v4
       - name: 'Installing browserstack-cypress-cli'
         run: npm install -g browserstack-cypress-cli
       - name: 'Running test on BrowserStack'
-        run:  browserstack-cypress run --sync
+        # --- IMPORTANT MODIFICATION HERE ---
+        # Explicitly specify ONLY Chrome on macOS Ventura.
+        # This overrides any browser list that might be in browserstack.json.
+        run: browserstack-cypress run --sync --browsers "chrome@latest:OS X Ventura"
       - name: Download visual screenshots
         uses: actions/upload-artifact@v4
         with:
