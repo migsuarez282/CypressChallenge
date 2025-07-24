@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 import LoginPageActions from '../../support/commands/LoginPageActions';
 import { cleanAndParsePrice } from '../../support/utils/helpers'; // Import helper
 
-describe('End-to-End Checkout Process, single product initial login', () => {
+describe('End-to-End Checkout Process, products from homepage, initial login', () => {
 
     // Global setup for checkout tests: Login user, add product, navigate to checkout form
     beforeEach(() => {

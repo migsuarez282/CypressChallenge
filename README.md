@@ -1,6 +1,15 @@
-# Cypress Base Project 
+# Cypress Testin Lab Challenge
 
->This project aims to implement a general guideline and structure easy to follow for all Hugers
+>This project aims to implement a general AT framework and structure an easy base project, to validate the core functionalities for the Test lab ecommerce and start a Test Automation strategy.
+
+## General aspect to consider in the Test Automation Strategy worked:
+
+## Documents to have into account
+[Web Site tested](https://www.laboratoriodetesting.com/)
+[Test Plan V1](https://docs.google.com/document/d/1P4Tix-HGA30UYdlS80SjJ_LB6GdscIubR7Ags4gqyIA/edit?usp=sharing)
+[Test Cases V1](https://docs.google.com/document/d/1xsE936enKd_crHeP5QSu1eJIIBF8IG7VSAHXoG8DneU/edit?tab=t.0)
+[Test Strategy draft](https://docs.google.com/document/d/1Enr7PuIIMbrNKpNl-WblC_zaXEkKP9jCiHhm-Is7fGg/edit?tab=t.0)
+[API](https://api.laboratoriodetesting.com/api-docs/)
 
 
 ## Prerequisites
@@ -34,11 +43,18 @@ The project is compiled for Node Package Manager and follows the standard direct
 ```Gherkin
 src
   + cypress                               | Location of automation source files                               
-    + e2e                                 | Contains all the tests 
+    + e2e
+      + api                               | Tests to validate the login and signup api 
+      + auth                              | Tests to validate the login and signup ui
+      + cart                              | Tests to validate the add to cart behaviors
+      + checkyout                         | Tests to validate the checkout behaviors
+      + checkyout                         | Tests to validate the favorites behaviors
     + fixtures                            | .json files to store all isolated data required to execute the tests 
     + support                             | Contains elements, commands and  
         + commands                        | Custom commands that simulate the user interactions                      
         + elements                        | Defined constants that include the DOM locators
+        + pages                           | Defined the commands and elements defined, fachade structure
+        + utils                           | Defined the helpers required to validate the prices.
         + utilities.js                    | Common functions 
         + e2e.js                          | Class to import all created commands
 + cypress.config.js                       | Global Cyopress configuration. The most important variable here is the baseUrl
@@ -97,3 +113,6 @@ the scenarios used during automation were the following
 >  Raptor Team :t-rex:
 >  That's it, We hope you like it
 >  
+
+
+>Update date: 24072025
