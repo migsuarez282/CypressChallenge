@@ -48,7 +48,7 @@ src
       + auth                              | Tests to validate the login and signup ui
       + cart                              | Tests to validate the add to cart behaviors
       + checkyout                         | Tests to validate the checkout behaviors
-      + checkyout                         | Tests to validate the favorites behaviors
+      + favorites                         | Tests to validate the favorites behaviors
     + fixtures                            | .json files to store all isolated data required to execute the tests 
     + support                             | Contains elements, commands and  
         + commands                        | Custom commands that simulate the user interactions                      
