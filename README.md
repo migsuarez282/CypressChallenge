@@ -4,12 +4,12 @@
 
 ## General aspect to consider in the Test Automation Strategy worked:
 
-## Documents to have into account
-[Web Site tested](https://www.laboratoriodetesting.com/)
-[Test Plan V1](https://docs.google.com/document/d/1P4Tix-HGA30UYdlS80SjJ_LB6GdscIubR7Ags4gqyIA/edit?usp=sharing)
-[Test Cases V1](https://docs.google.com/document/d/1xsE936enKd_crHeP5QSu1eJIIBF8IG7VSAHXoG8DneU/edit?tab=t.0)
-[Test Strategy draft](https://docs.google.com/document/d/1Enr7PuIIMbrNKpNl-WblC_zaXEkKP9jCiHhm-Is7fGg/edit?tab=t.0)
-[API](https://api.laboratoriodetesting.com/api-docs/)
+>## Documents to have into account
+* [Web Site tested](https://www.laboratoriodetesting.com/)
+* [Test Plan V1](https://docs.google.com/document/d/1P4Tix-HGA30UYdlS80SjJ_LB6GdscIubR7Ags4gqyIA/edit?usp=sharing)
+* [Test Cases V1](https://docs.google.com/document/d/1xsE936enKd_crHeP5QSu1eJIIBF8IG7VSAHXoG8DneU/edit?tab=t.0)
+* [Test Strategy draft](https://docs.google.com/document/d/1Enr7PuIIMbrNKpNl-WblC_zaXEkKP9jCiHhm-Is7fGg/edit?tab=t.0)
+* [API](https://api.laboratoriodetesting.com/api-docs/)
 
 
 ## Prerequisites
