@@ -5,7 +5,6 @@ import products from '../../fixtures/products.json';
 describe('Add and Delete Favorites (wishlist page) using the UI', () => {
 
     beforeEach(() => {
-        // Phase 1: Log in a valid user via API and set token/cookie
         cy.fixture('login').then((user) => {
             LoginPageActions.apiLogin(user.email, user.password).then((response) => {
                 window.localStorage.setItem('token', response.body.token);
@@ -15,6 +14,30 @@ describe('Add and Delete Favorites (wishlist page) using the UI', () => {
     });
 
     it('Add some products to favorites from PDP for multipleProducts', () => {
+        FavoritePage.actions.visitWishlist();
+                cy.wait(2000);
+                function removeNext() {
+                    cy.get('body').then(($body) => {
+                        const $cards = $body.find('[data-at="favorite-card"]');
+                        if ($cards.length === 0) {
+                            cy.wait(500);
+                            cy.contains('No has agregado ningún favorito', { timeout: 5000 }).should('be.visible');
+                            return;
+                        }
+                        const href = $cards[0].getAttribute('href');
+                        cy.visit(href);
+                        cy.wait(2000);
+                        cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
+                        cy.wait(500);
+                        FavoritePage.actions.visitWishlist();
+                        cy.wait(2000);
+                        removeNext();
+                    });
+                }
+        
+                removeNext();
+        
+        
         const productSlugs = products.multipleProductsForCheckout.map(product => product.slug);
         const productSlug1 = 'banda-elastica-de-resistencia';
         FavoritePage.actions.addProductToFavoritesBySlug(productSlug1);
@@ -28,27 +51,34 @@ describe('Add and Delete Favorites (wishlist page) using the UI', () => {
             FavoritePage.elements.getFavoriteCards().should('have.length', initialFavorites + productSlugs.length);
         });
     });
-    it('Delete all products from favorites, no using description', () => {
+   
+
+    it('Add all products to favorites from PDP', () => {
+        
         FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().then(($cards) => {
-            const totalFavorites = $cards.length;
-            if (totalFavorites === 0) return;
-
-            // Elimina todos los favoritos uno por uno
-            for (let i = 0; i < totalFavorites; i++) {
-                FavoritePage.elements.getFavoriteCards().first().click();
-                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
-                cy.get('[data-at="add-to-favorites"]').should('be.visible');
-                FavoritePage.actions.visitWishlist();
-            }
-        });
-
-        // Verifica que no quedan favoritos
-        FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().should('have.length', 0);
-    });
-
-    it.only('Add all products to favorites from PDP', () => {
+                cy.wait(2000);
+                function removeNext() {
+                    cy.get('body').then(($body) => {
+                        const $cards = $body.find('[data-at="favorite-card"]');
+                        if ($cards.length === 0) {
+                            cy.wait(500);
+                            cy.contains('No has agregado ningún favorito', { timeout: 5000 }).should('be.visible');
+                            return;
+                        }
+                        const href = $cards[0].getAttribute('href');
+                        cy.visit(href);
+                        cy.wait(2000);
+                        cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
+                        cy.wait(500);
+                        FavoritePage.actions.visitWishlist();
+                        cy.wait(2000);
+                        removeNext();
+                    });
+                }
+        
+                removeNext();
+        
+        
         const productSlugs = products.allProductsForCheckout.map(product => product.slug);
         const productSlug1 = 'banda-elastica-de-resistencia';
 
@@ -63,24 +93,6 @@ describe('Add and Delete Favorites (wishlist page) using the UI', () => {
             FavoritePage.elements.getFavoriteCards().should('have.length', initialFavorites + productSlugs.length);
         });
     });
-    it('Delete all products from favorites, no using description', () => {
-        FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().then(($cards) => {
-            const totalFavorites = $cards.length;
-            if (totalFavorites === 0) return;
-
-            // Elimina todos los favoritos uno por uno
-            for (let i = 0; i < totalFavorites; i++) {
-                FavoritePage.elements.getFavoriteCards().first().click();
-                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
-                cy.get('[data-at="add-to-favorites"]').should('be.visible');
-                FavoritePage.actions.visitWishlist();
-            }
-        });
-
-        // Verifica que no quedan favoritos
-        FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().should('have.length', 0);
-    });
+   
 
 });
