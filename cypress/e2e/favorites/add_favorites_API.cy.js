@@ -1,10 +1,11 @@
 import FavoritePage from '../../support/pages/FavoritePage';
 import LoginPageActions from '../../support/commands/LoginPageActions';
+import ProductDetailPage from '../../support/pages/ProductDetailPage';
+
 
 describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
 
     beforeEach(() => {
-        // Phase 1: Log in a valid user via API and set token/cookie
         cy.fixture('login').then((user) => {
             LoginPageActions.apiLogin(user.email, user.password).then((response) => {
                 window.localStorage.setItem('token', response.body.token);
@@ -14,30 +15,61 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
     });
 
     it('Delete all products from favorites, no using description', () => {
-    FavoritePage.actions.visitWishlist();
-    cy.get('body').then(($body) => {
-        // Solo elimina si existen favoritos
-        if ($body.find('[data-at="favorite-card"]').length > 0) {
-            FavoritePage.elements.getFavoriteCards().then(($cards) => {
-                for (let i = 0; i < $cards.length; i++) {
-                    FavoritePage.elements.getFavoriteCards().first().click();
-                    cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
-                    cy.get('[data-at="add-to-favorites"]').should('be.visible');
-                    FavoritePage.actions.visitWishlist();
+        FavoritePage.actions.visitWishlist();
+        cy.wait(2000);
+         function removeNext() {
+            cy.get('body').then(($body) => {
+                const $cards = $body.find('[data-at="favorite-card"]');
+                if ($cards.length === 0) {
+                    cy.wait(500);
+                    cy.contains('No has agregado ningún favorito', { timeout: 5000 }).should('be.visible');
+                    return;
                 }
+                 const href = $cards[0].getAttribute('href');
+                cy.visit(href);
+                cy.wait(2000);
+                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
+                cy.wait(500);
+                FavoritePage.actions.visitWishlist();
+                cy.wait(2000);
+                removeNext();
             });
         }
-    });
 
-    // Verifica que no quedan favoritos
-    FavoritePage.actions.visitWishlist();
-    FavoritePage.elements.getFavoriteCards().should('not.exist');
+        removeNext();
+
+
     });
 
     it('Add 2 products to favorites using API', () => {
-        const productSlug = 'banda-elastica-de-resistencia'; // Cambia por el slug que necesites
-        FavoritePage.actions.addProductToFavoritesBySlug(productSlug);
+
         FavoritePage.actions.visitWishlist();
+        cy.wait(2000);
+         function removeNext() {
+            cy.get('body').then(($body) => {
+                const $cards = $body.find('[data-at="favorite-card"]');
+                if ($cards.length === 0) {
+                    cy.wait(500);
+                    cy.contains('No has agregado ningún favorito', { timeout: 5000 }).should('be.visible');
+                    return;
+                }
+                const href = $cards[0].getAttribute('href');
+                cy.visit(href);
+                cy.wait(2000);
+                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
+                cy.wait(500);
+                FavoritePage.actions.visitWishlist();
+                cy.wait(2000);
+                removeNext();
+            });
+        }
+
+        removeNext();
+
+        const productSlug = 'banda-elastica-de-resistencia'; 
+        ProductDetailPage.actions.visitProductDetailPage(productSlug);   FavoritePage.actions.addProductToFavoritesBySlug(productSlug);
+        FavoritePage.actions.visitWishlist();
+        cy.wait(2000); 
         FavoritePage.elements.getFavoriteCards().then(($item) => {
             cy.wrap($item.length).as('initialFavorites');
         });
@@ -45,13 +77,12 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
         const productIds = Array.from({ length: 2 }, (_, i) => (i + 1).toString());
 
         productIds.forEach((id) => {
-            // Llama a la API para agregar todos los productos favoritos
             cy.request({
                 method: 'POST',
                 url: 'https://api.laboratoriodetesting.com/api/v1/favorites', // Ajusta el endpoint según tu backend
                 body: {
-                    products: id // Reemplaza con los IDs de tus productos
-                },
+                    products: id 
+                 },
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem('token')}`
                 }
@@ -60,8 +91,8 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
             });
         });
 
-        // Verifica en la UI que se agregaron todos
         FavoritePage.actions.visitWishlist();
+        cy.wait(2000); 
         cy.get('@initialFavorites').then((initialFavorites) => {
             FavoritePage.elements.getFavoriteCards().then(($updatedList) => {
                 expect($updatedList).to.have.length(initialFavorites + productIds.length);
@@ -78,13 +109,12 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
         const productIds = Array.from({ length: 2 }, (_, i) => (i + 1).toString());
 
         productIds.forEach((id) => {
-            // Llama a la API para agregar todos los productos favoritos
             cy.request({
                 method: 'DELETE',
                 url: `https://api.laboratoriodetesting.com/api/v1/favorites/${id}`,
                 //body: {
-                //  products: id // Reemplaza con los IDs de tus productos
-                //},
+                //  products: id 
+                // },
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem('token')}`
                 }
@@ -94,32 +124,36 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
         });
 
         FavoritePage.actions.visitWishlist();
+        cy.wait(2000); 
         FavoritePage.elements.getFavoriteCards().should('have.length', 1);
 
     });
 
-    it('Delete all products from favorites, no using description', () => {
-        FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().then(($cards) => {
-            const totalFavorites = $cards.length;
-            if (totalFavorites === 0) return;
-
-            // Elimina todos los favoritos uno por uno
-            for (let i = 0; i < totalFavorites; i++) {
-                FavoritePage.elements.getFavoriteCards().first().click();
-                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
-                cy.get('[data-at="add-to-favorites"]').should('be.visible');
-                FavoritePage.actions.visitWishlist();
-            }
-        });
-
-        // Verifica que no quedan favoritos
-        FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().should('have.length', 0);
-    });
-
     it('Add 8 products to favorites using API', () => {
-        const productSlug = 'banda-elastica-de-resistencia'; // Cambia por el slug que necesites
+         FavoritePage.actions.visitWishlist();
+        cy.wait(2000);
+         function removeNext() {
+            cy.get('body').then(($body) => {
+                const $cards = $body.find('[data-at="favorite-card"]');
+                if ($cards.length === 0) {
+                     cy.wait(500);
+                    cy.contains('No has agregado ningún favorito', { timeout: 5000 }).should('be.visible');
+                    return;
+                }
+                const href = $cards[0].getAttribute('href');
+                cy.visit(href);
+                cy.wait(2000);
+                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
+                cy.wait(500);
+                FavoritePage.actions.visitWishlist();
+                cy.wait(2000);
+                removeNext();
+            });
+        }
+
+        removeNext();
+        
+        const productSlug = 'banda-elastica-de-resistencia'; 
         FavoritePage.actions.addProductToFavoritesBySlug(productSlug);
         FavoritePage.actions.visitWishlist();
         FavoritePage.elements.getFavoriteCards().then(($item) => {
@@ -129,13 +163,12 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
         const productIds = Array.from({ length: 8 }, (_, i) => (i + 1).toString());
 
         productIds.forEach((id) => {
-            // Llama a la API para agregar todos los productos favoritos
             cy.request({
                 method: 'POST',
                 url: 'https://api.laboratoriodetesting.com/api/v1/favorites', // Ajusta el endpoint según tu backend
                 body: {
-                    products: id // Reemplaza con los IDs de tus productos
-                },
+                    products: id 
+                 },
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem('token')}`
                 }
@@ -144,7 +177,6 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
             });
         });
 
-        // Verifica en la UI que se agregaron todos
         FavoritePage.actions.visitWishlist();
         cy.get('@initialFavorites').then((initialFavorites) => {
             FavoritePage.elements.getFavoriteCards().then(($updatedList) => {
@@ -162,13 +194,12 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
         const productIds = Array.from({ length: 8 }, (_, i) => (i + 1).toString());
 
         productIds.forEach((id) => {
-            // Llama a la API para agregar todos los productos favoritos
             cy.request({
                 method: 'DELETE',
                 url: `https://api.laboratoriodetesting.com/api/v1/favorites/${id}`,
                 //body: {
-                //  products: id // Reemplaza con los IDs de tus productos
-                //},
+                //  products: id 
+                //  //},
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem('token')}`
                 }
@@ -182,44 +213,69 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
 
     });
 
-    it('Delete all products from favorites, no using description', () => {
-        FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().then(($cards) => {
-            const totalFavorites = $cards.length;
-            if (totalFavorites === 0) return;
-
-            // Elimina todos los favoritos uno por uno
-            for (let i = 0; i < totalFavorites; i++) {
-                FavoritePage.elements.getFavoriteCards().first().click();
-                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
-                cy.get('[data-at="add-to-favorites"]').should('be.visible');
-                FavoritePage.actions.visitWishlist();
-            }
-        });
-
-        // Verifica que no quedan favoritos
-        FavoritePage.actions.visitWishlist();
-        FavoritePage.elements.getFavoriteCards().should('have.length', 0);
-    });
-
     it('Add all 19 products to favorites using API', () => {
-        const productSlug = 'banda-elastica-de-resistencia'; // Cambia por el slug que necesites
+         FavoritePage.actions.visitWishlist();
+        cy.wait(2000);
+         function removeNext() {
+            cy.get('body').then(($body) => {
+                const $cards = $body.find('[data-at="favorite-card"]');
+                if ($cards.length === 0) {
+                    cy.wait(500);
+                    cy.contains('No has agregado ningún favorito', { timeout: 5000 }).should('be.visible');
+                    return;
+                }
+                 const href = $cards[0].getAttribute('href');
+                cy.visit(href);
+                cy.wait(2000);
+                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
+                cy.wait(500);
+                FavoritePage.actions.visitWishlist();
+                cy.wait(2000);
+                removeNext();
+            });
+        }
+
+        removeNext();
+        
+        const productSlug = 'banda-elastica-de-resistencia'; 
+         FavoritePage.actions.visitWishlist();
+        cy.wait(2000);
+        function removeNext() {
+            cy.get('body').then(($body) => {
+                const $cards = $body.find('[data-at="favorite-card"]');
+                if ($cards.length === 0) {
+                    cy.wait(500);
+                    cy.contains('No has agregado ningún favorito', { timeout: 5000 }).should('be.visible');
+                    return;
+                }
+               const href = $cards[0].getAttribute('href');
+                cy.visit(href);
+                cy.wait(2000);
+                cy.get('[data-at="remove-from-favorites"]').should('be.visible').click();
+                cy.wait(500);
+                FavoritePage.actions.visitWishlist();
+                cy.wait(2000);
+                removeNext();
+            });
+        }
+
+        removeNext();
+
         FavoritePage.actions.addProductToFavoritesBySlug(productSlug);
         FavoritePage.actions.visitWishlist();
         FavoritePage.elements.getFavoriteCards().then(($item) => {
             cy.wrap($item.length).as('initialFavorites');
         });
-       
+
         const productIds = Array.from({ length: 19 }, (_, i) => (i + 1).toString());
 
         productIds.forEach((id) => {
-            // Llama a la API para agregar todos los productos favoritos
             cy.request({
                 method: 'POST',
                 url: 'https://api.laboratoriodetesting.com/api/v1/favorites', // Ajusta el endpoint según tu backend
                 body: {
-                    products: id // Reemplaza con los IDs de tus productos
-                },
+                    products: id 
+                  },
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem('token')}`
                 }
@@ -228,7 +284,7 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
             });
         });
 
-        // Verifica en la UI que se agregaron todos
+       
         FavoritePage.actions.visitWishlist();
         cy.get('@initialFavorites').then((initialFavorites) => {
             FavoritePage.elements.getFavoriteCards().then(($updatedList) => {
@@ -241,18 +297,14 @@ describe('Add and Delete Favorites (wishlist page) using the APIs', () => {
         FavoritePage.elements.getFavoriteCards().then(($item) => {
             cy.wrap($item.length).as('initialFavorites');
         });
-
-
         const productIds = Array.from({ length: 19 }, (_, i) => (i + 1).toString());
-
         productIds.forEach((id) => {
-            // Llama a la API para agregar todos los productos favoritos
             cy.request({
                 method: 'DELETE',
                 url: `https://api.laboratoriodetesting.com/api/v1/favorites/${id}`,
                 //body: {
-                //  products: id // Reemplaza con los IDs de tus productos
-                //},
+                //  products: id 
+                //   //},
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem('token')}`
                 }
