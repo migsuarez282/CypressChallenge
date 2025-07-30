@@ -5,24 +5,20 @@ class FavoritePageActions {
     visitWishlist() {
         cy.visit('/whishlist');
     }
-
     getFavoritesCount() {
         return FavoritePageElements.getFavoriteCards().its('length');
     }
-
     addProductToFavoritesBySlug(slug) {
         cy.visit(`/products/${slug}`);
         cy.wait(600);
         FavoritePageElements.getAddToFavoritesButton().click();
     }
-
     addFirstProductToFavorites() {
         cy.visit('');
         FavoritePageElements.getProductCardByIndex(0).click();
         cy.wait(500);
         FavoritePageElements.getAddToFavoritesButton().click();
     }
-
     addMultipleProductsToFavoritesUI(productSlugs) {
     const addNext = (index) => {
         if (index >= productSlugs.length) return;
