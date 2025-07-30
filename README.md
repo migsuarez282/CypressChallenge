@@ -1,4 +1,4 @@
-# Cypress Testin Lab Challenge
+# Cypress Testing Lab Challenge
 
 >This project aims to implement a general AT framework and structure an easy base project, to validate the core functionalities for the Test lab ecommerce and start a Test Automation strategy.
 
