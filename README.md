@@ -2,7 +2,7 @@
 
 >This project aims to implement a general AT framework and structure an easy base project, to validate the core functionalities for the Test lab ecommerce and start a Test Automation strategy.
 
-## General aspect to consider in the Test Automation Strategy worked:
+## General aspects to consider in the Test Automation Strategy worked:
 
 >## Documents to have into account
 * [Web Site tested](https://www.laboratoriodetesting.com/)
