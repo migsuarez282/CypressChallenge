@@ -23,25 +23,6 @@ class FavoritePageActions {
         FavoritePageElements.getAddToFavoritesButton().click();
     }
 
-   removeAllFavoritesUI() {
-    const removeNext = () => {
-        FavoritePageElements.getFavoriteCards().then(($cards) => {
-            if ($cards.length === 0) {
-                // Assertion: Verifica que no hay favoritos y aparece el mensaje
-                cy.contains('No has agregado ningún favorito').should('be.visible');
-                FavoritePageElements.getFavoriteCards().should('not.exist');
-                return;
-            }
-            cy.wrap($cards[0]).click({ timeout: 10000 });
-            cy.get('[data-at="remove-from-favorites"]', { timeout: 10000 }).should('be.visible').click();
-            cy.get('[data-at="add-to-favorites"]', { timeout: 10000 }).should('be.visible');
-            FavoritePage.actions.visitWishlist();
-            removeNext();
-        });
-    };
-    removeNext();
-}
-
     addMultipleProductsToFavoritesUI(productSlugs) {
     const addNext = (index) => {
         if (index >= productSlugs.length) return;
