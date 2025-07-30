@@ -3,7 +3,7 @@ const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 const getCompareSnapshotPlugin = require('cypress-image-diff-js/plugin');
 
 module.exports = defineConfig({
-  retries: 1,
+  retries: 2,
   chromeWebSecurity: false,
   e2e: {
     baseUrl: 'https://www.laboratoriodetesting.com',
